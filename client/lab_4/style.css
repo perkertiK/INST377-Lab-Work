@@ -257,7 +257,8 @@ div.restaurant_list {
 }
 
 .prev,
-.next {
+.next
+ {
   border: none;
   margin: 2px;
   text-align: center;
@@ -276,9 +277,11 @@ div.restaurant_list {
 }
 
 .prev:hover,
-.next:hover {
-  /* Pick a good background colour for your hover pseudoclass */
+.next:hover
+{
+
 }
+
 
 /*
 Form Styles
@@ -319,4 +322,6 @@ form input {
       justify-content: center;
       align-items: center;
     }
+
+
 }
