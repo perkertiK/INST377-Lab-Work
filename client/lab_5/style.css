@@ -147,9 +147,9 @@
     flex: 1 2 auto;
     margin: 1rem;
     align-items: center;
-    justify-content: center;
     display: flex;
     flex-direction: column;
+
   }
   
   /*
@@ -319,11 +319,20 @@
       .container {
         background-color: rgba(189, 173, 226, 0.65);
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
       }
       .right_section {
+        flex:1 1 auto;
+        justify-content: flex-start;
+      }
+      .box {
+        width: 100%;
+        width: -moz-available;          /* WebKit-based browsers will ignore this. */
+        width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+        width: fill-available;
         align-items: flex-start;
+      }
+      .left_section {
+        flex:1 1 auto;
       }
   
   }
