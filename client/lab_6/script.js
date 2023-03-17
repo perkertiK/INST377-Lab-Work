@@ -31,16 +31,26 @@ function filterList(list, query) {
   })
 }
 
+function cutRestaurantList(list){
+  console.log('fired cut list');
+  const range = [...Array(15).keys()];
+
+}
+
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form');
-  const filterButton = document.querySelector('.filter_button')
+  const filterButton = document.querySelector('#filter_button')
+  const loadDataButton = document.querySelector('#data_load')
+  const generateListButton = document.querySelector('#generate')
+
+
   // This class name needs to be set on your form before you can listen for an event on it
   // Add a querySelector that targets your filter button here
 
   let currentList = []; // this is "scoped" to the main event function
   
   /* We need to listen to an "event" to have something happen in our page - here we're listening for a "submit" */
-  mainForm.addEventListener('submit', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
+  loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
     
     // This prevents your page from becoming a list of 1000 records from the county, even if your form still has an action set on it
     submitEvent.preventDefault(); 
@@ -78,7 +88,12 @@ async function mainEvent() { // the async keyword means we can make API requests
     console.log(newList);
     injectHTML(newList);
 
-  });
+  })
+
+  generateListButton.addEventListener('click', (event) => {
+
+  })
+
 
   /*
     Now that you HAVE a list loaded, write an event listener set to your filter button
