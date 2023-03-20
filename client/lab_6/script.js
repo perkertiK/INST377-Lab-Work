@@ -1,8 +1,3 @@
-/*
-  Hook this script to index.html
-  by adding `<script src="script.js">` just before your closing `</body>` tag
-*/
-
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -12,13 +7,12 @@ function getRandomIntInclusive(min, max) {
 
 function injectHTML(list) {
   console.log('fired injectHTML')
-  const target = document.querySelector('#restaurant_list')
+  const target = document.querySelector('#restaurant_list');
   target.innerHTML = '';
-  list.forEach((item, index) => {
+  list.forEach((item) => {
     const str = `<li>${item.name}</li>`;
     target.innerHTML += str
   })
-
 }
 
 /* A quick filter that will return something based on a matching input */
@@ -31,7 +25,7 @@ function filterList(list, query) {
   })
 }
 
-function cutRestaurantList(list){
+function cutRestaurantList(list) {
   console.log('fired cut list');
   const range = [...Array(15).keys()];
   return newArray = range.map((item) => {
@@ -43,30 +37,20 @@ function cutRestaurantList(list){
 
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form');
-  const filterButton = document.querySelector('#filter_button');
+  const filterDataButton = document.querySelector('#filter_button');
   const loadDataButton = document.querySelector('#data_load');
   const generateListButton = document.querySelector('#generate');
 
-  const loadAnimation = documet.querySelector('#data_load_animation');
+  const loadAnimation = document.querySelector('#data_load_animation');
   loadAnimation.style.display = 'none';
-
-
-
-  // This class name needs to be set on your form before you can listen for an event on it
-  // Add a querySelector that targets your filter button here
 
   let currentList = []; // this is "scoped" to the main event function
   
   /* We need to listen to an "event" to have something happen in our page - here we're listening for a "submit" */
   loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
-    
-    // This prevents your page from becoming a list of 1000 records from the county, even if your form still has an action set on it
-    
-    // this is substituting for a "breakpoint" - it prints to the browser to tell us we successfully submitted the form
     console.log('Loading Data'); 
     loadAnimation.style.display = 'inline-block';
 
-   
     // Basic GET request - this replaces the form Action
     const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
 
@@ -75,7 +59,9 @@ async function mainEvent() { // the async keyword means we can make API requests
     loadAnimation.style.display = 'none';
     console.table(currentList); 
   });
-  filterButton.addEventListener('click', (event) => {
+
+
+  filterDataButton.addEventListener('click', (event) => {
     console.log('Clicked FilterButton');
 
     const formData = new FormData(mainForm);
@@ -83,29 +69,19 @@ async function mainEvent() { // the async keyword means we can make API requests
 
     console.log(formProps);
     const newList = filterList(currentList, formProps.resto);
-    console.log(newList);
     injectHTML(newList);
 
-  })
+
+    console.log(newList);
+  });
 
   generateListButton.addEventListener('click', (event) => {
-    console.log('generate new list');
+    console.log('generate new List');
     const restaurantsList = cutRestaurantList(currentList);
     console.log(restaurantsList);
     injectHTML(restaurantsList);
 
   })
-
-
-  /*
-    Now that you HAVE a list loaded, write an event listener set to your filter button
-    it should use the 'new FormData(target-form)' method to read the contents of your main form
-    and the Object.fromEntries() method to convert that data to an object we can work with
-    When you have the contents of the form, use the placeholder at line 7
-    to write a list filter
-    Fire it here and filter for the word "pizza"
-    you should get approximately 46 results
-  */
 }
 
 /*

@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perkerti Koirala Lab 5</title>
+    <title>Perkerti Koirala Lab 6</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -15,18 +15,22 @@
         <div class="left_section box">
             <h3>Form Inputs</h3>
             <form action="https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json" class="box main_form">
+              <button type="button" id="data_load">Load County Data</button>
+              <div>
                 <label for="resto">Restaurant Names</label>
-                <input type="text" id="resto" name="resto" />
-                <button type="button" id="data_load">Load County Data</button>
+                <input type="text" id="resto" name="resto">
+              </div>
+              <div class="buttons">
                 <button type="button" id="filter_button">Filter Data</button>
                 <button type="button" id="generate">Generate List</button>
+              </div>
             </form>
         </div>
    
         <div class="right_section box">
           <h3>Local Restaurants</h3>
           <ol class="box" id="restaurant_list">
-            A list of local restaurants
+            A list of local restaurants 
           </ol>
           <div class="lds-ellipsis" id="data_load_animation"><div></div><div></div><div></div><div></div></div>
         </div>
