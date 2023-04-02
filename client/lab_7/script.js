@@ -44,6 +44,7 @@ function getRandomIntInclusive(min, max) {
   
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
+    generateListButton.classList.add('hidden') ;
   
     let storedList = [];
     let currentList = []; // this is "scoped" to the main event function
@@ -52,12 +53,18 @@ function getRandomIntInclusive(min, max) {
     loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
       console.log('Loading Data'); 
       loadAnimation.style.display = 'inline-block';
+
   
       // Basic GET request - this replaces the form Action
       const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   
       // This changes the response from the GET into data we can use - an "object"
       storedList = await results.json();
+      if (storedList.length > 0){
+        generateListButton.classList.remove('hidden');
+      }
+  
+  
 
       loadAnimation.style.display = 'none';
       console.table(storedList); 
